@@ -2,17 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
-    const exercises1 = 10;
-    const exercises2 = 7;
-    const exercises3 = 14;
-
     return (
         <div>
             <Otsikko name='Half Stack -sovelluskehitys' />
-            <Sisalto subject='Reactin perusteet' exercises={exercises1} />
-            <Sisalto subject='Tiedonvälitys propseilla' exercises={exercises2} />
-            <Sisalto subject='Komponenttien tila' exercises={exercises3} />
-            <Yhteensa exercises1={exercises1} exercises2={exercises2} exercises3={exercises3} />
+            <Sisalto/>
+            <Yhteensa exercises1={10} exercises2={7} exercises3={14} />
         </div>
     )
 }
@@ -23,7 +17,17 @@ const Otsikko = (props) => {
     )
 }
 
-const Sisalto = (props) => {
+const Sisalto = () => {
+    return (
+        <div>
+            <Osa subject='Reactin perusteet' exercises={10} />
+            <Osa subject='Tiedonvälitys propseilla' exercises={7} />
+            <Osa subject='Komponenttien tila' exercises={14} />
+        </div>
+    )
+}
+
+const Osa = (props) => {
     return (
         <p>{props.subject} {props.exercises}</p>
     )
