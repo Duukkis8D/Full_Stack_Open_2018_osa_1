@@ -36,7 +36,6 @@ const Otsikko = (props) => <h1>{props.teksti}</h1>
 const Statistiikka = (props) => {
     return (
         <div>
-            {console.log("Statistiikka-komponentista", props.state)}
             <p>hyvä {props.state.good}</p>
             <p>neutraali {props.state.neutral}</p>
             <p>huono {props.state.bad}</p>
