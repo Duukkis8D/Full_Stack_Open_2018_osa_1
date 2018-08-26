@@ -34,9 +34,12 @@ class App extends React.Component {
 const Otsikko = (props) => <h1>{props.teksti}</h1>
 
 const Statistiikka = (props) => {
-    const keskiarvo = (props.state.good * 1 + props.state.bad * -1) /
+    let keskiarvo = (props.state.good * 1 + props.state.bad * -1) /
         (props.state.good + props.state.neutral + props.state.bad);
-    const positiivisia = props.state.good / (props.state.good + props.state.neutral + props.state.bad) * 100 + " %"
+    if( Number.isNaN(keskiarvo) ) keskiarvo = 0;
+
+    let positiivisia = props.state.good / (props.state.good + props.state.neutral + props.state.bad) * 100
+    if( Number.isNaN(positiivisia) ) positiivisia = 0;
 
     return (
         <div>
@@ -44,7 +47,7 @@ const Statistiikka = (props) => {
             <p>neutraali {props.state.neutral}</p>
             <p>huono {props.state.bad}</p>
             <p>keskiarvo {keskiarvo}</p>
-            <p>positiivisia {positiivisia}</p>
+            <p>positiivisia {positiivisia + " %"}</p>
         </div>
     )
 }
