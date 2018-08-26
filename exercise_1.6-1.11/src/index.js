@@ -45,6 +45,12 @@ const Statistics = (props) => {
     let positiivisia = props.state.good / (props.state.good + props.state.neutral + props.state.bad) * 100
     if( Number.isNaN(positiivisia) ) positiivisia = 0;
 
+    if(props.state.good === 0 && props.state.neutral === 0 && props.state.bad === 0) {
+        return (
+            <p>Ei yhtään palautetta annettu</p>
+        )
+    }
+
     return (
         <div>
             <Statistic teksti="hyvä" toiminto={props.state.good}/>
