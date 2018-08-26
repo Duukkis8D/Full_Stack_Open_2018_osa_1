@@ -20,20 +20,24 @@ class App extends React.Component {
 
         return (
             <div>
-                <Otsikko teksti="anna palautetta"/>
-                <button onClick={handleGoodClick()}>hyvä</button>
-                <button onClick={handleNeutralClick()}>neutraali</button>
-                <button onClick={handleBadClick()}>huono</button>
-                <Otsikko teksti="statistiikka"/>
-                <Statistiikka state={this.state}/>
+                <Header teksti="anna palautetta"/>
+                <Button teksti="hyvä" onClick={handleGoodClick()}/>
+                <Button teksti="neutraali" onClick={handleNeutralClick()}/>
+                <Button teksti="huono" onClick={handleBadClick()}/>
+                <Header teksti="statistiikka"/>
+                <Statistics state={this.state}/>
             </div>
         )
     }
 }
 
-const Otsikko = (props) => <h1>{props.teksti}</h1>
+const Header = (props) => <h1>{props.teksti}</h1>
 
-const Statistiikka = (props) => {
+const Button = (props) => {
+    return <button onClick={props.onClick}>{props.teksti}</button>
+}
+
+const Statistics = (props) => {
     let keskiarvo = (props.state.good * 1 + props.state.bad * -1) /
         (props.state.good + props.state.neutral + props.state.bad);
     if( Number.isNaN(keskiarvo) ) keskiarvo = 0;
@@ -43,13 +47,17 @@ const Statistiikka = (props) => {
 
     return (
         <div>
-            <p>hyvä {props.state.good}</p>
-            <p>neutraali {props.state.neutral}</p>
-            <p>huono {props.state.bad}</p>
-            <p>keskiarvo {keskiarvo}</p>
-            <p>positiivisia {positiivisia + " %"}</p>
+            <Statistic teksti="hyvä" toiminto={props.state.good}/>
+            <Statistic teksti="neutraali" toiminto={props.state.neutral}/>
+            <Statistic teksti="huono" toiminto={props.state.bad}/>
+            <Statistic teksti="keskiarvo" toiminto={keskiarvo}/>
+            <Statistic teksti="positiivisia" toiminto={positiivisia + " %"}/>
         </div>
     )
+}
+
+const Statistic = (props) => {
+    return <p>{props.teksti} {props.toiminto}</p>
 }
 
 ReactDOM.render(
