@@ -12,18 +12,17 @@ class App extends React.Component {
     }
 
     render() {
-        const handleGoodClick = () => () => this.setState({ good: this.state.good + 1 })
-
-        const handleNeutralClick = () => () => this.setState({ neutral: this.state.neutral + 1 })
-
-        const handleBadClick = () => () => this.setState({ bad: this.state.bad + 1 })
+        // Computed property names (ES2015):
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/
+        // object_initializer#New_notations_in_ECMAScript_2015
+        const handleClick = (arvo) => () => this.setState({ [arvo]: this.state[arvo] + 1 })
 
         return (
             <div>
                 <Header teksti="anna palautetta"/>
-                <Button teksti="hyvä" onClick={handleGoodClick()}/>
-                <Button teksti="neutraali" onClick={handleNeutralClick()}/>
-                <Button teksti="huono" onClick={handleBadClick()}/>
+                <Button teksti="hyvä" onClick={handleClick("good")}/>
+                <Button teksti="neutraali" onClick={handleClick("neutral")}/>
+                <Button teksti="huono" onClick={handleClick("bad")}/>
                 <Header teksti="statistiikka"/>
                 <Statistics state={this.state}/>
             </div>
