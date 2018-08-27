@@ -51,18 +51,27 @@ const Statistics = (props) => {
     }
 
     return (
-        <div>
-            <Statistic teksti="hyvä" toiminto={props.state.good}/>
-            <Statistic teksti="neutraali" toiminto={props.state.neutral}/>
-            <Statistic teksti="huono" toiminto={props.state.bad}/>
-            <Statistic teksti="keskiarvo" toiminto={keskiarvo}/>
-            <Statistic teksti="positiivisia" toiminto={positiivisia + " %"}/>
-        </div>
+        <table>
+            <thead></thead>
+            <tbody>
+                <Statistic teksti="hyvä" toiminto={props.state.good}/>
+                <Statistic teksti="neutraali" toiminto={props.state.neutral}/>
+                <Statistic teksti="huono" toiminto={props.state.bad}/>
+                <Statistic teksti="keskiarvo" toiminto={keskiarvo}/>
+                <Statistic teksti="positiivisia" toiminto={positiivisia + " %"}/>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
     )
 }
 
 const Statistic = (props) => {
-    return <p>{props.teksti} {props.toiminto}</p>
+    return (
+        <tr>
+            <td>{props.teksti}</td>
+            <td>{props.toiminto}</td>
+        </tr>
+    )
 }
 
 ReactDOM.render(
