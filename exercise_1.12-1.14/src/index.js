@@ -10,12 +10,25 @@ class App extends React.Component {
     }
 
     render() {
+        const handleClick = (min, max) => {
+            return () => this.setState({ selected: Math.floor(Math.random() * (max - min + 1)) + min });
+        }
+
         return (
             <div>
                 {this.props.anecdotes[this.state.selected]}
+                <Button onClick={handleClick(0, 5)}/>
             </div>
         )
     }
+}
+
+const Button = (props) => {
+    return (
+        <div>
+            <br></br><button onClick={props.onClick}>Next anecdote</button>
+        </div>
+    )
 }
 
 const anecdotes = [
