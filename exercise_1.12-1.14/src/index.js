@@ -5,28 +5,48 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            selected: 0
+            selected: 0,
+            votes: [0, 0, 0, 0, 0, 0]
         }
     }
 
     render() {
-        const handleClick = (min, max) => {
+        const handleClickShowButton = (min, max) => {
             return () => this.setState({ selected: Math.floor(Math.random() * (max - min + 1)) + min });
+        }
+
+        const handleClickVoteButton = () => {
+            const votes = [...this.state.votes];
+
+            return () => {
+                votes[this.state.selected] = votes[this.state.selected] + 1;
+                this.setState({ votes: votes });
+            }
         }
 
         return (
             <div>
-                {this.props.anecdotes[this.state.selected]}
-                <Button onClick={handleClick(0, 5)}/>
+                <p>{this.props.anecdotes[this.state.selected]}</p>
+                <p>has {this.state.votes[this.state.selected]} votes</p>
+                <VoteButton onClick={handleClickVoteButton()}/>
+                <NextButton onClick={handleClickShowButton(0, 5)}/>
             </div>
         )
     }
 }
 
-const Button = (props) => {
+const VoteButton = (props) => {
     return (
         <div>
-            <br></br><button onClick={props.onClick}>Next anecdote</button>
+            <br></br><button onClick={props.onClick}>Vote this anecdote</button>
+        </div>
+    )
+}
+
+const NextButton = (props) => {
+    return (
+        <div>
+            <br></br><button onClick={props.onClick}>Show next anecdote</button>
         </div>
     )
 }
