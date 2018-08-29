@@ -30,6 +30,7 @@ class App extends React.Component {
                 <p>has {this.state.votes[this.state.selected]} votes</p>
                 <VoteButton onClick={handleClickVoteButton()}/>
                 <NextButton onClick={handleClickShowButton(0, 5)}/>
+                <MostVotes anecdotes={this.props.anecdotes} votes={this.state.votes}/>
             </div>
         )
     }
@@ -47,6 +48,29 @@ const NextButton = (props) => {
     return (
         <div>
             <br></br><button onClick={props.onClick}>Show next anecdote</button>
+        </div>
+    )
+}
+
+const MostVotes = (props) => {
+    if(Math.max(...props.votes) > 0) {
+        console.log(...props.votes)
+        const mostVotes = () => Math.max(...props.votes);
+        const arrayIndex = props.votes.findIndex(mostVotes);
+        console.log("arrayIndex:", arrayIndex);
+
+        return (
+            <div>
+                <br></br><p><b>Anecdote with most votes:</b></p>
+                <p>{props.anecdotes[arrayIndex]}</p>
+                <p>has {props.votes[arrayIndex]} votes</p>
+            </div>
+        )
+    }
+
+    return (
+        <div>
+            <p>Vote first!</p>
         </div>
     )
 }
