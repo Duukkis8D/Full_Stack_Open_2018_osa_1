@@ -54,10 +54,7 @@ const NextButton = (props) => {
 
 const MostVotes = (props) => {
     if(Math.max(...props.votes) > 0) {
-        console.log(...props.votes)
-        const mostVotes = () => Math.max(...props.votes);
-        const arrayIndex = props.votes.findIndex(mostVotes);
-        console.log("arrayIndex:", arrayIndex);
+        const arrayIndex = props.votes.indexOf(Math.max(...props.votes));
 
         return (
             <div>
